@@ -10,25 +10,25 @@ import xupt.se.ttms.model.Play;
 
 
 public class PlaySrv {
-	private iPlayDAO stuDAO=DAOFactory.creatPlayDAO();
+	private iPlayDAO playDAO=DAOFactory.creatPlayDAO();
 	
-	public int add(Play stu){
-		return stuDAO.insert(stu); 		
+	public int add(Play play){
+		return playDAO.insert(play); 		
 	}
 	
-	public int modify(Play stu){
-		return stuDAO.update(stu); 		
+	public int modify(Play play){
+		return playDAO.update(play); 		
 	}
 	
 	public int delete(int ID){
-		return stuDAO.delete(ID); 		
+		return playDAO.delete(ID); 		
 	}
 	
 	public List<Play> Fetch(String condt){
-		return stuDAO.select(condt);		
+		return playDAO.select(condt);		
 	}
 	
 	public List<Play> FetchAll(){
-		return stuDAO.select("");		
+		return playDAO.select("");		
 	}
 }

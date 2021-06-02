@@ -122,6 +122,7 @@
 			document.getElementById("rowcount").value = rowcount;
 			document.getElementById("colcount").value = colcount;
 			document.getElementById("intro").value = intro;
+			console.log(data);
 		}
 	}
 
@@ -145,10 +146,11 @@
 			req.open("post", url, true);
 			req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 			req.onreadystatechange = checkComplete;
-			var data = "type=" + form.type.value + "&studioid="
-					+ form.studioid.value + "&studioname="
-					+ encodeURIComponent(form.studioname.value) + "&rowcount="
-					+ form.rowcount.value + "&colcount=" + form.colcount.value
+			var data = "type=" + form.type.value 
+					+ "&studioid="+ form.studioid.value 
+					+ "&studioname="+ encodeURIComponent(form.studioname.value) 
+					+ "&rowcount="+ form.rowcount.value 
+					+ "&colcount=" + form.colcount.value
 					+ "&intro=" + encodeURIComponent(form.intro.value);
 			req.send(data);
 		}

@@ -23,6 +23,7 @@ public class Play {
 		this.name = name;
 		this.introduction = introduction;
 		this.image = image;
+		this.video = video;
 		this.length = length;
 		this.ticketPrice = ticketPrice;
 	}
@@ -92,6 +93,23 @@ public class Play {
 		this.ticketPrice = ticketPrice;
 	}
 
+	public String getVideo() {
+		return video;
+	}
+
+	public void setVideo(String video) {
+		this.video = video;
+	}
+
+	@Override
+	public String toString() {
+		return "Play [id=" + id + ", type_id=" + type_id + ", lang_id=" + lang_id + ", name=" + name + ", introduction="
+				+ introduction + ", image=" + image + ", video=" + video + ", length=" + length + ", ticketPrice="
+				+ ticketPrice + "]";
+	}
+	
+	
+	
 }
 	
 	

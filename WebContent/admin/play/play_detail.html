@@ -113,14 +113,15 @@
 		document.getElementById("type").value = type;
 		if(type=="update"){
 			var playid = UrlParm.parm("id");
-			var playname = UrlParm.parm("name");
-			var type_id = UrlParm.parm("type_id");
-			var lang_id = UrlParm.parm("lang_id");
-			var image = UrlParm.parm("image");
-			var video = UrlParm.parm("video");
-			var length = UrlParm.parm("length");
-			var ticketPrice = UrlParm.parm("ticketPrice");
-			var intro = UrlParm.parm("introduction");
+			var playname = UrlParm.parm("play_name");
+			var type_id = UrlParm.parm("dict_type_id");
+			var lang_id = UrlParm.parm("dict_lang_id");
+			var intro = UrlParm.parm("play_introduction");
+			var image = UrlParm.parm("play_image");
+			var video = UrlParm.parm("play_video");
+			var length = UrlParm.parm("play_length");
+			var ticketPrice = UrlParm.parm("play_ticketPrice");
+			
 			document.getElementById("playid").value = playid;
 			document.getElementById("playname").value = playname;
 			document.getElementById("type_id").value = type_id;
@@ -130,20 +131,22 @@
 			document.getElementById("video").value = video;
 			document.getElementById("length").value = length;
 			document.getElementById("ticketPrice").value = ticketPrice;
+			console.log(data);
 		}
 	}
 
 	function check() {
 		var form = document.getElementById("myform");
-		if(form.playname.value=="" || form.type_id.value=="" || form.lang_id.value == "" ||  form.introduction.value=="" || form.image.value=="" || form.length.value == "" || form.ticketPrice.value == "") {
+		if(form.playname.value=="" || form.type_id.value=="" || form.lang_id.value == "" ||  form.introduction.value=="" || form.image.value=="" || form.video.value=="" || form.length.value == "" || form.ticketPrice.value == "") {
 			alert("请填写完整信息");
 			return;
 		}
-		/* if(isNaN(form.rowcount.value) || isNaN(form.colcount.value)){
-			alert("座位行数和座位列数不是数字");
+		if(isNaN(form.ticketPrice.value) || isNaN(form.length.value)){
+			alert("时长和票价不是数字");
 			return;
-		} */
+		} 
 		var url = "../../PlayServlet";
+		
 	    if (window.XMLHttpRequest)
 	        req = new XMLHttpRequest();
 	    else if (window.ActiveXObject)
@@ -153,19 +156,21 @@
 			req.open("post", url, true);
 			req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 			req.onreadystatechange = checkComplete;
+			
 			 var data = "type=" + form.type.value 
-			 		+ "&play_id="+ form.play_id.value 
+			 		+ "&playid="+ form.playid.value 
+			 		+ "&type_id="+ form.type_id.value 
 			 		+ "&lang_id="+ form.lang_id.value
 			 		+ "&playname="+ encodeURIComponent(form.playname.value) 
-			 		+ "&intro=" + encodeURIComponent(form.introduction.value); 
-			 		+ "&image="+ form.lang_id.value
-			 		+ "&length="+ form.lang_id.value
-			 		+ "&ticketPrice="+ form.rowcount.value 
-					
-			req.send("data = " +id);
+			 		+ "&intro=" + encodeURIComponent(form.intro.value)
+			 		+ "&image="+ encodeURIComponent(form.image.value)
+			 		+ "&video="+ encodeURIComponent(form.video.value)
+			 		+ "&length="+ form.length.value
+			 		+ "&ticketPrice="+ form.ticketPrice.value;
+					console.log(data);
+			req.send(data);
 		}
 	}
-
 	function checkComplete() {
 		if (req.readyState == 4 && req.status == 200) {
 			alert(req.responseText);
@@ -376,53 +381,64 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-sm-2 control-label">剧目类型</label>
-					<div class="col-sm-6">
-						<input type="text" class="form-control" name="rowcount"
-							id="rowcount" placeholder="请输入剧目类型">
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="col-sm-2 control-label">剧目lang</label>
-					<div class="col-sm-6">
-						<input type="text" class="form-control" name="rowcount"
-							id="rowcount" placeholder="请输入剧目lang">
-					</div>
-				</div>
-				<div class="form-group">
 					<label class="col-sm-2 control-label">剧目名称</label>
 					<div class="col-sm-6">
 						<input type="text" class="form-control" name="playname"
 							id="playname" placeholder="请输入剧目名称">
 					</div>
 				</div>
-				
 				<div class="form-group">
-					<label class="col-sm-2 control-label">座位列数</label>
+					<label class="col-sm-2 control-label">剧目类型</label>
 					<div class="col-sm-6">
-						<input type="text" class="form-control" name="colcount"
-							id="colcount" placeholder="请输入座位列数">
+						<input type="text" class="form-control" name="type_id"
+							id="type_id" placeholder="请输入剧目类型">
 					</div>
-				</div> 
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label">剧目lang</label>
+					<div class="col-sm-6">
+						<input type="text" class="form-control" name="lang_id"
+							id="lang_id" placeholder="请输入剧目lang">
+					</div>
+				</div>
+				
+				
+				
 				<div class="form-group">
 					<label class="col-sm-2 control-label">剧目描述</label>
 					<div class="col-sm-6">
-						<input type="text" class="form-control" name="intro"
+						<input type="text" class="form-control" name="introduction"
 							id="intro" placeholder="请输剧目描述">
 					</div>
 				</div>
 				<div class="form-group">
+					<label class="col-sm-2 control-label">图片</label>
+					<div class="col-sm-6">
+						<input type="text" class="form-control" name="image"
+							id="image" placeholder="请插入图片">
+					</div>
+				</div> 
+				
+				<div class="form-group">
+					<label class="col-sm-2 control-label">音频</label>
+					<div class="col-sm-6">
+						<input type="text" class="form-control" name="video"
+							id="video" placeholder="请插入音频">
+					</div>
+				</div> 
+				
+				<div class="form-group">
 					<label class="col-sm-2 control-label">剧目时长</label>
 					<div class="col-sm-6">
-						<input type="text" class="form-control" name="intro"
-							id="intro" placeholder="请输剧目时长">
+						<input type="text" class="form-control" name="length"
+							id="length" placeholder="请输剧目时长">
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="col-sm-2 control-label">剧目票价</label>
 					<div class="col-sm-6">
-						<input type="text" class="form-control" name="intro"
-							id="intro" placeholder="请输剧目票价">
+						<input type="text" class="form-control" name="ticketPrice"
+							id="ticketPrice" placeholder="请输剧目票价">
 					</div>
 				</div>
 				<div class="form-group">

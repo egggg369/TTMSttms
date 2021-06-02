@@ -32,6 +32,7 @@ public class PlayServlet extends HttpServlet
 	{
      String type=request.getParameter("type");	
      	// 根据请求操作类型，执行相应的增、删、该、查
+     	 System.out.println("=====================2");
 	     if(type.equalsIgnoreCase("add"))
 	         add(request, response);
 	     else if(type.equalsIgnoreCase("delete"))
@@ -46,16 +47,18 @@ public class PlayServlet extends HttpServlet
     {
         Play play=null;
         int id=0;
+        System.out.println("来这里了addplay");
         try
         {
         	int type_id = Integer.valueOf(request.getParameter("type_id"));
             int lang_id = Integer.valueOf(request.getParameter("lang_id"));
-            String name=request.getParameter("playname");
+            String name=request.getParameter("name");
+            String introduction=request.getParameter("introduction");
             String image = request.getParameter("image");
             String video = request.getParameter("video");
             int length = Integer.valueOf(request.getParameter("length"));
             float ticketPrice = Float.valueOf(request.getParameter("ticketPrice"));
-            String introduction=request.getParameter("intro");
+            
             play=new Play(id, type_id, lang_id, name, introduction, image, video, length, ticketPrice);
             response.setContentType("text/html;charset=utf-8");
             PrintWriter out=response.getWriter();
@@ -97,17 +100,19 @@ public class PlayServlet extends HttpServlet
     {
         Play play=null;
         int id=0;
+        System.out.println("来这里了修改play");
         try
         {
             id=Integer.valueOf(request.getParameter("playid"));
+            String name=request.getParameter("playname");
             int type_id = Integer.valueOf(request.getParameter("type_id"));
             int lang_id = Integer.valueOf(request.getParameter("lang_id"));
-            String name=request.getParameter("playname");
+            String introduction=request.getParameter("intro");
             String image = request.getParameter("image");
             String video = request.getParameter("video");
             int length = Integer.valueOf(request.getParameter("length"));
             float ticketPrice = Float.valueOf(request.getParameter("ticketPrice"));
-            String introduction=request.getParameter("intro");
+            
             play=new Play(id, type_id, lang_id, name, introduction, image, video, length, ticketPrice);
             response.setContentType("text/html;charset=utf-8");
             PrintWriter out=response.getWriter();
@@ -151,6 +156,7 @@ public class PlayServlet extends HttpServlet
                 json.put("name", s.getName());
                 json.put("introduction", s.getIntroduction());
                 json.put("image", s.getImage());
+                json.put("video", s.getVideo());
                 json.put("length", s.getLength());
                 json.put("ticketPrice", s.getTicketPrice() );
                 array.put(json);
@@ -167,7 +173,7 @@ public class PlayServlet extends HttpServlet
             out.flush();
             out.close();
         }
-        // System.out.print(jsonStr);
+        System.out.print(jsonStr);
     }
 
 }

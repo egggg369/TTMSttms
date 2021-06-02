@@ -18,7 +18,10 @@ public class StudioDAO implements iStudioDAO
         try
         {
             String sql="insert into studio(studio_name, studio_row_count, studio_col_count, studio_introduction )"
-                    + " values('" + stu.getName() + "', " + stu.getRowCount() + ", " + stu.getColCount() + ", '"
+                    + " values('" 
+            		+ stu.getName() + "', " 
+                    + stu.getRowCount() + ", " 
+            		+ stu.getColCount() + ", '"
                     + stu.getIntroduction() + "' )";
             DBUtil db=new DBUtil();
             db.openConnection();
@@ -48,9 +51,14 @@ public class StudioDAO implements iStudioDAO
         int result=0;
         try
         {
-            String sql="update studio set " + " studio_name ='" + stu.getName() + "', " + " studio_row_count = "
-                    + stu.getRowCount() + ", " + " studio_col_count = " + stu.getColCount() + ", "
-                    + " studio_introduction = '" + stu.getIntroduction() + "' ";
+            String sql="update studio set " 
+            		+ " studio_name ='" + stu.getName() + "', " 
+            		+ " studio_row_count = "
+                    + stu.getRowCount() + ", " 
+            		+ " studio_col_count = " 
+                    + stu.getColCount() + ", "
+                    + " studio_introduction = '" 
+                    + stu.getIntroduction() + "' ";
             sql+=" where studio_id = " + stu.getID();
             DBUtil db=new DBUtil();
             db.openConnection();

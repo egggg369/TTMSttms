@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>汉唐剧院管理系统-影厅管理</title>
+<title>汉唐剧院管理系统-剧目管理</title>
 <link rel="stylesheet" href="../../css/bootstrap.min.css">
 <link rel="stylesheet" href="../../css/ace.min.css" />
 <link rel="stylesheet" href="../../css/font-awesome.min.css" />
@@ -54,7 +54,7 @@
       else if (window.ActiveXObject)
           req = new ActiveXObject("Microsoft.XMLHTTP");
     if (req) {
-      //采用POST方式，异步传输
+      //采用POST方式，异步传输s
       req.open("post", url, true);
       //POST方式，必须加入如下头信息设定
       req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -76,28 +76,37 @@
         var rowCount = theTable.rows.length; //获得当前表格的行数
         var row = theTable.insertRow(rowCount);//在tale里动态的增加tr
         row.insertCell(0).innerHTML = json[i].id;
-        row.insertCell(1).innerHTML = json[i].name;
-        row.insertCell(2).innerHTML = json[i].type_id;
-        row.insertCell(3).innerHTML = json[i].lang_id;
+        row.insertCell(1).innerHTML = json[i].type_id;
+        row.insertCell(2).innerHTML = json[i].lang_id;
+        row.insertCell(3).innerHTML = json[i].name;
         row.insertCell(4).innerHTML = json[i].introduction;
         row.insertCell(5).innerHTML = json[i].image;
-        row.insertCell(6).innerHTML = json[i].length;
-        row.insertCell(7).innerHTML = json[i].ticketPrice;
-        var tmp = json[i].id + ",\'" 
-        		+ json[i].name + "\',"
+        row.insertCell(6).innerHTML = json[i].video;
+        row.insertCell(7).innerHTML = json[i].length;
+        row.insertCell(8).innerHTML = json[i].ticketPrice;
+        var tmp = json[i].id + "," 
 				+ json[i].type_id + "," 
 				+ json[i].lang_id + ",\'" 
-				+ json[i].introduction +"\'"
-				+ json[i].image +"\'"
-				+ json[i].length +"\'"
+				+ json[i].name + "\',\'"
+				+ json[i].introduction +"\',\'"
+				+ json[i].image +"\',\'"
+				+ json[i].video +"\',"
+				+ json[i].length +",\'"
 				+ json[i].ticketPrice +"\'";
-        row.insertCell(5).innerHTML = '<input type="button" class="btn btn-xs btn-primary" value="修改" onclick="modify('+ tmp +')" />&nbsp;&nbsp;<input type="button" class="btn btn-xs btn-danger" value="删除" onclick="del('+json[i].id+')" />';
+        row.insertCell(9).innerHTML = '<input type="button" class="btn btn-xs btn-primary" value="修改" onclick="modify('+ tmp +')" />&nbsp;&nbsp;<input type="button" class="btn btn-xs btn-danger" value="删除" onclick="del('+json[i].id+')" />';
       }
     }
   }
-  function modify(a,b,c,d,e,f,g,h){
-    window.location="play_detail.html?type=update&id="+a+"&name="+encodeURIComponent(b)+"&type_id="+c+"&lang_id="+d+"&introduction="+f+"&image" 
-    		+g+ "length"+h+"ticketPrice" +encodeURIComponent(e);
+  function modify(a,b,c,d,e,f,g,h,i){
+    window.location="play_detail.html?type=update&id="+a
+    +"&type_id="+b
+	+"&lang_id="+c
+	+"&name="+encodeURIComponent(d)
+	+"&introduction="+encodeURIComponent(e)
+	+"&image="+encodeURIComponent(f)
+	+"&video="+encodeURIComponent(g)
+	+"&length="+h
+	+"&ticketPrice="+i;
   }
 
   function del(id){

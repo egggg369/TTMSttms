@@ -30,7 +30,7 @@ public class StudioServlet extends HttpServlet
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         String type=request.getParameter("type");
-
+        System.out.println("=====================");
         // 根据请求操作类型，执行相应的增、删、该、查
         if(type.equalsIgnoreCase("add"))
             add(request, response);
@@ -52,6 +52,7 @@ public class StudioServlet extends HttpServlet
             int rowCount=Integer.valueOf(request.getParameter("rowcount"));
             int colCount=Integer.valueOf(request.getParameter("colcount"));
             String intro=request.getParameter("intro");
+            
             stu=new Studio(id, name, rowCount, colCount, intro);
             response.setContentType("text/html;charset=utf-8");
             PrintWriter out=response.getWriter();
@@ -93,6 +94,7 @@ public class StudioServlet extends HttpServlet
     {
         Studio stu=null;
         int id=0;
+        System.out.println("here修改");
         try
         {
             id=Integer.valueOf(request.getParameter("studioid"));
